@@ -15,3 +15,7 @@ terraform {
     dynamodb_table = "chrispsheehan-s3-file-processor-tf-lockid"
   }
 }
+
+provider "aws" {
+  region = var.region
+}
