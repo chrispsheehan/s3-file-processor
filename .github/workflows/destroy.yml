@@ -1,4 +1,4 @@
-name: Deploy Environment
+name: Destroy Environment
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ env:
   aws_role: ${{ vars.AWS_ROLE }}
 
 jobs:
-  deploy:
+  destroy:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
