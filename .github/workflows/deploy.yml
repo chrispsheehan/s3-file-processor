@@ -46,7 +46,7 @@ jobs:
           echo "S3_BUCKET_NAME=$S3_BUCKET_NAME" >> $GITHUB_ENV
 
           TIMESTAMP=$(date +%Y%m%d%H%M%S)
-          TEST_FILE_NAME=$TIMESTAMP-test.txt"
+          TEST_FILE_NAME=$TIMESTAMP-test.txt
           echo "TEST_FILE_NAME=$TEST_FILE_NAME"
           echo "TEST_FILE_NAME=$TEST_FILE_NAME" >> $GITHUB_ENV
 
