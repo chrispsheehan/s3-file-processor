@@ -13,7 +13,8 @@ def lambda_handler(event, context):
 
         print(f"Bucket: {bucket_name}, Object Key: {object_key}, Event Type: {event_type}, Event Time: {event_time}")
 
-        new_object_key = 'processed/' + object_key  # Change 'new-folder/' to the desired folder path
+        filename = object_key.split('/')[-1]
+        new_object_key = f'processed/{filename}'
         copy_source = {'Bucket': bucket_name, 'Key': object_key}
         s3_client.copy_object(CopySource=copy_source, Bucket=bucket_name, Key=new_object_key)
         s3_client.delete_object(Bucket=bucket_name, Key=object_key)  # Delete the original object
