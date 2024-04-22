@@ -55,7 +55,7 @@ jobs:
         run: |
             echo "badgers" > $GITHUB_WORKSPACE/$TEST_FILE_NAME
             aws s3 cp $GITHUB_WORKSPACE/$TEST_FILE_NAME s3://$S3_BUCKET_NAME/input/$TEST_FILE_NAME
-            sleep 2
+            sleep 5
 
       - name: test confirm processed
         shell: bash
