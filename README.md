@@ -1,6 +1,14 @@
 # s3-file-processor
 
-test
+Move file from /input to /processed folders in s3.
+
+This enables some processing to happen in between those two steps.
+
+## test in lambda console
+
+- upload a file to `chrispsheehan-s3-file-processer`
+- file key (in this case) is `input/test.txt`
+- add the below payload to the test window and hit test
 
 ```json
 {
@@ -25,11 +33,11 @@ test
         "s3SchemaVersion": "1.0",
         "configurationId": "your_configuration_id",
         "bucket": {
-          "name": "chrispsheehan-s3-file-processer-input",
+          "name": "# ",
           "ownerIdentity": {
             "principalId": "your_principal_id"
           },
-          "arn": "arn:aws:s3:::chrispsheehan-s3-file-processer-input"
+          "arn": "arn:aws:s3:::chrispsheehan-s3-file-processer"
         },
         "object": {
           "key": "input/test.txt",
