@@ -11,6 +11,18 @@ resource "aws_lambda_permission" "allow_bucket" {
   source_arn    = aws_s3_bucket.bucket.arn
 }
 
+resource "aws_iam_policy" "lambda_policy" {
+  name        = "${local.base_name}_api_policy"
+  description = "IAM policy to allow Lambda function to read/write s3"
+
+  policy = data.aws_iam_policy_document.lambda_policy.json
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
+  role       = aws_iam_role.iam_for_lambda.name
+  policy_arn = aws_iam_policy.lambda_policy.arn
+}
+
 resource "aws_lambda_function" "func" {
   filename      = var.lambda_zip_path
   function_name = local.lambda_name
@@ -21,6 +33,7 @@ resource "aws_lambda_function" "func" {
 
 resource "aws_s3_bucket" "bucket" {
   bucket = local.input_bucket
+  force_destroy = true
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
@@ -28,7 +41,8 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
 
   lambda_function {
     lambda_function_arn = aws_lambda_function.func.arn
-    events              = ["s3:*"]
+    events              = ["s3:ObjectCreated:*"]
+    filter_prefix       = "input/"
   }
 
   depends_on = [aws_lambda_permission.allow_bucket]
