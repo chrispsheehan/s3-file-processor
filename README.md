@@ -1,6 +1,6 @@
 # s3-file-processor
 
-Move file from /input to /processed folders in s3.
+Move file from `/input` to `/processed` folders in s3.
 
 This enables some processing to happen in between those two steps.
 
